@@ -1,0 +1,80 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout">
+    <Dialog id="newDialog" showHeader="false" verticalScrolling="true" afterOpen="onDialogAfterOpen" afterClose="onAfterCloseDialog" contentHeight="70%" contentWidth="60%">
+        <NavContainer id="wizardNavContainer">
+            <f:DynamicPage id="_IDGenDynamicPage1" stickySubheaderProvider="AggiungiRigaWizard" toggleHeaderOnTitleClick="false" class="sapUiNoContentPadding" showFooter="false">
+                <f:title>
+                    <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
+                        <f:heading>
+                            <Title id="_IDGenTitle1" text="Aggiungi Riga"/>
+                        </f:heading>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>
+                    <Wizard id="CreateWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler" enableBranching="true" showNextButton="false" renderMode="Page">
+                        <!-- navigationChange="handleNavigationChange"  -->
+                        <WizardStep id="ObligatoryFieldsStep" title="Campi Obbligatori" subsequentSteps= "SecondStep">
+                            <!-- validated="false" title="Obligatory fields" activate="ObligatoryFormActivation" -->
+
+                            <smartForm:SmartForm id="ObligatoryForm" editable="true">
+                                <smartForm:Group id="_IDGenGroup1">
+                                    <smartForm:GroupElement id="_IDGenGroupElement1">
+                                        <smartField:SmartField id="idFieldPosizione" mandatory="true" value="{Account_IdAccount}"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                            </smartForm:SmartForm>
+                            <FlexBox id="_IDGenFlexBox1" alignItems="Start" justifyContent="SpaceBetween">
+                                <Button id="_IDGenButton1" text="Annulla" press="onWizardClose"/>
+                                <Button id="FirstNextStep" text="Avanti" press="onNextStep" type="Emphasized" enabled="true" />
+                            </FlexBox>
+                        </WizardStep>
+                        <WizardStep id="SecondStep" validated="false" activate="ThirdStepActivation" title="Ripartizione" subsequentSteps= "LastStep">
+                            <!-- title="Third step" -->
+                            <smartForm:SmartForm id="SecondForm" editable="true">
+                                <smartForm:Group id="_IDGenGroup2">
+                                    <smartForm:GroupElement id="_IDGenGroupElement2">
+                                        <smartField:SmartField id="idFieldAccountingDate" mandatory="true" value="{AccountingDate}"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                            </smartForm:SmartForm>
+                            <FlexBox id="_IDGenFlexBox2" alignItems="Start" justifyContent="SpaceBetween">
+                                <FlexBox id="_IDGenFlexBox3" alignItems="Start" justifyContent="Start">
+                                    <Button id="ThirdBackStep" text="Indietro" press="onBack" type="Emphasized" enabled="true" />
+                                    <Button id="_IDGenButton2" text="Annulla" press="onWizardClose"/>
+                                </FlexBox>
+                                <Button id="ThirdNextStep" text="Avanti" press="onNextStep" type="Emphasized" enabled="true" />
+                            </FlexBox>
+                        </WizardStep>
+
+                        <WizardStep id="LastStep" validated="false" activate="LastStepActivation" title="Importi">
+                            <!-- title="Last step" -->
+                            <smartForm:SmartForm id="LastForm" editable="true">
+                                <smartForm:Group id="_IDGenGroup3">
+                                    <smartForm:GroupElement id="_IDGenGroupElement3">
+                                        <smartField:SmartField enabled="true" id="idFieldVATRate" value="{VATRate}" uomEditable="false"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement id="_IDGenGroupElement4">
+                                        <smartField:SmartField enabled="true" id="idFieldImportoLordo" value="{ImportoLordo}" uomEditable="false"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                            </smartForm:SmartForm>
+                            <FlexBox id="_IDGenFlexBox4" alignItems="Start" justifyContent="SpaceBetween">
+                                <FlexBox id="_IDGenFlexBox5" alignItems="Start" justifyContent="Start">
+                                    <Button id="LastBackStep" text="Indietro" press="onBack" type="Emphasized" enabled="true" />
+                                    <Button id="_IDGenButton3" text="Annulla" press="onWizardClose"/>
+                                </FlexBox>
+                                <Button id="_IDGenButton4" text="Salva" type="Emphasized" press="onSave" />
+                            </FlexBox>
+                        </WizardStep>
+                    </Wizard>
+                </f:content>
+            </f:DynamicPage>
+        </NavContainer>
+    </Dialog>
+</core:FragmentDefinition>
